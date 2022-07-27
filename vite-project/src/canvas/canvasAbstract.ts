@@ -1,14 +1,29 @@
 import config from '../config'
-export default abstract class canvasAbstract{
-    constructor(
+
+export default abstract class canvasAbstract {
+    //数量
+    protected items =[]
+    abstract render():void
+	constructor(
 		protected app = document.getElementById('app') as HTMLDivElement,
 		protected el = document.createElement('canvas'),
 		protected canvas = el.getContext('2d')!
 	) {
-		el.width = config.canvas.width
-		el.height = config.canvas.height
-		app.insertAdjacentElement('afterbegin', el)
-        canvas.fillStyle = 'blue'
-        canvas.fillRect(0,0,500,500)
+		this.createCanvas()
+		this.drawModels()
 	}
+	protected createCanvas() {
+		this.el.width = config.canvas.width
+		this.el.height = config.canvas.height
+		this.app.insertAdjacentElement('afterbegin', this.el)
+	}
+	protected drawModels() {
+		
+	}
+    protected position(){
+        return {
+            x:20,
+            y:10
+        }
+    }
 }
