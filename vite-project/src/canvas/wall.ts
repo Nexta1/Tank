@@ -1,17 +1,17 @@
 import config from '../config'
 import canvasAbstract from './canvasAbstract'
-import model from '../model/straw'
-class straw extends canvasAbstract implements  ICanvas{
+import model from '../model/wall'
+class wall extends canvasAbstract implements ICanvas{
     num(): number {
-       return config.straw.num
+        return config.wall.num
     }
     model(): Modelconstructor {
-       return  model
+        return  model
     }
 	render(): void {
         super.createModels()
         super.renderModels()
-        
+      
 	}
 }
-export default new straw() 
+export default new wall() 

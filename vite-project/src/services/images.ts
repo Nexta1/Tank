@@ -1,6 +1,6 @@
 import config from '../config'
 //取的图片
-type mapKey = keyof typeof config.imgs
+export type mapKey = keyof typeof config.imgs
 export const image = new Map<mapKey, HTMLImageElement>()
 
 export const promises = Object.entries(config.imgs).map(([key, value]) => {
