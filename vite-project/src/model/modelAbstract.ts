@@ -1,21 +1,19 @@
-import config from '../config'
-// import { image } from '../services/images'
+import { directionEnum } from "../enum/positionEnum";
 
 export default abstract class modelAbstract {
-	// abstract render(): void
+	direction!: directionEnum;
+	abstract render(): void
+	abstract image(): HTMLImageElement
 	constructor(
-		protected canvas: CanvasRenderingContext2D,
-		protected x: number,
-		protected y: number
-	) {}
-	protected draw(img:HTMLImageElement) {
-		this.canvas.drawImage(
-			// image.get('straw')!,
-            img,
-			this.x,
-			this.y,
-			config.model.width,
-			config.model.height
-		)
+		public canvas: CanvasRenderingContext2D,
+		public x: number,
+		public y: number
+	) {
+		this.randomDirection() 
+	}
+	protected randomDirection() {
+		this.direction = Object.values(directionEnum)[
+			Math.floor(Math.random() * 4)
+		] as directionEnum
 	}
 }

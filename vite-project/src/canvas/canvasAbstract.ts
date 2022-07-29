@@ -1,14 +1,14 @@
-// import { image } from './../services/images';
+ import config from '../config'																												
 import config from '../config'
 import position from '../services/position'
 
 export default abstract class canvasAbstract {
 	//记录开始的位置不断渲染
-	protected models:IModel[] =[]
+	protected models: IModel[] = []
 	//定义渲染规范方法
 	abstract render(): void
-	abstract num():number
-	abstract model():Modelconstructor
+	abstract num(): number
+	abstract model(): Modelconstructor
 	constructor(
 		protected app = document.getElementById('app') as HTMLDivElement,
 		protected el = document.createElement('canvas'),
@@ -32,8 +32,16 @@ export default abstract class canvasAbstract {
 		})
 	}
 	//渲染
-	protected renderModels(){
-		this.models.forEach(model => model.render())
+	protected renderModels() {
+		// this.models.forEach(model => model.render())
+		this.models.forEach(model =>
+			model.canvas.drawImage(
+				model.image(),
+				model.x,
+				model.y,
+				config.model.width,
+				config.model.height
+			)
+		)
 	}
-	
 }
