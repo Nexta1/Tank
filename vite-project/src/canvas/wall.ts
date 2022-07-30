@@ -14,4 +14,4 @@ class wall extends canvasAbstract implements ICanvas{
       
 	}
 }
-export default new wall() 
+export default new wall('wall') 

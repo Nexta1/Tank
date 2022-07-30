@@ -13,4 +13,4 @@ class steels extends canvasAbstract implements ICanvas {
 		super.renderModels()
 	}
 }
-export default new steels()
+export default new steels('steels')

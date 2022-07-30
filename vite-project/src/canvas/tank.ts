@@ -2,7 +2,7 @@ import config from '../config'
 import canvasAbstract from './canvasAbstract'
 import model from '../model/tank'
 import position from '../services/position'
-class water extends canvasAbstract implements ICanvas {
+class tank extends canvasAbstract implements ICanvas {
 	num(): number {
 		return config.tank.num
 	}
@@ -11,16 +11,25 @@ class water extends canvasAbstract implements ICanvas {
 	}
 	render(): void {
 		this.createModels()
+		this.renderModels()
+
+		setInterval(() => {
+			this.renderModels()
+		}, config.timeout)
+	}
+	//重写坦克模型
+	public renderModels() {
+		this.canvasBox.clearRect(0, 0, config.canvas.width, config.canvas.height)
 		super.renderModels()
 	}
-    //自定义坐标
+	//自定义坐标
 	protected createModels() {
 		for (let i = 0; i < this.num(); i++) {
 			const positionT = position.position()
 			const model = this.model()
-			const instance = new model(this.canvas, positionT.x,0)
-            this.models.push(instance)
+			const instance = new model(positionT.x, 0)
+			this.models.push(instance)
 		}
 	}
 }
-export default new water()
+export default new tank('tank')

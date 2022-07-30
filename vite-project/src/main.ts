@@ -6,6 +6,7 @@ import { promises } from './services/images'
 import water from './canvas/water'
 import steels from './canvas/steels'
 import tank from './canvas/tank'
+import bullet from './canvas/bullet'
 
 
 const app = document.querySelector<HTMLDivElement>('#app')!
@@ -21,5 +22,6 @@ async function bootstrap() {
     water.render()
     steels.render()
     tank.render()
+    bullet.render()
 }
 void bootstrap()

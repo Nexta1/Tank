@@ -14,4 +14,4 @@ class straw extends canvasAbstract implements  ICanvas{
         
 	}
 }
-export default new straw() 
+export default new straw('straw') 
