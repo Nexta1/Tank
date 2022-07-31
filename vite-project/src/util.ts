@@ -1,3 +1,4 @@
+import boss from './canvas/boss'
 import steels from './canvas/steels'
 import wall from './canvas/wall'
 import water from './canvas/water'
@@ -22,7 +23,7 @@ export default {
 		y: number,
 		width = config.model.width,
 		height = config.model.height,
-		models = [...water.models, ...steels.models, ...wall.models]
+		models = [...water.models, ...steels.models, ...wall.models,...boss.models]
 	): IModel | undefined {
 		return models.find(model => {
 			const state =

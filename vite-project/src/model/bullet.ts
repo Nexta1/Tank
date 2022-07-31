@@ -6,8 +6,13 @@ import modelAbstract from './modelAbstract'
 import util from '../util'
 import wall from '../canvas/wall'
 import steels from '../canvas/steels'
+import boss from '../canvas/boss'
+import tank from '../canvas/tank'
+import player from '../canvas/player'
+import audio from '../services/audio'
 
 export default class extends modelAbstract implements IModel {
+	name: string = 'bullet'
 	public canvas: ICanvas = bullet
 	constructor(public tank: IModel) {
 		super(tank.x + config.model.width / 2, tank.y + config.model.height / 2)
@@ -20,40 +25,38 @@ export default class extends modelAbstract implements IModel {
 	render(): void {
 		let x = this.x
 		let y = this.y
- 		switch (this.direction) {
+		//设置速度
+		let step = this.tank.name == 'play' ? 10 : 1
+		switch (this.direction) {
 			case directionEnum.top:
-				y--
+				y -= step
 				break
 			case directionEnum.bottom:
-				y++
+				y += step
 				break
 			case directionEnum.right:
-				x++
+				x += step
 				break
 			case directionEnum.left:
-				x--
+				x -= step
 				break
 		}
-		// 打到墙消失
+		// 砖墙打爆
 		const touchModel = util.isModelTouch(
 			x,
 			y,
 			config.bullet.width,
 			config.bullet.height,
-			[...wall.models]
+			[...wall.models, ...steels.models, ...boss.models,...tank.models,...player.models]
 		)
-		const touchModel2 = util.isModelTouch(
-			x,
-			y,
-			config.bullet.width,
-			config.bullet.height,
-			[...steels.models]
-		)
-		if (touchModel) { 
+		//tank包括自己
+		if (touchModel&&this.tank.name!=touchModel.name) {
 			this.destory()
-			touchModel.destory()	
+			if (touchModel.name != 'steels') touchModel.destory()
+			this.blast(touchModel)
+			audio.blast()
 		} else if (
-			util.isCanvasTouch(x, y, config.bullet.width, config.bullet.height )|| touchModel2
+			util.isCanvasTouch(x, y, config.bullet.width, config.bullet.height)
 		) {
 			this.destory()
 		} else {

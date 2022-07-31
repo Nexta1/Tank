@@ -6,6 +6,7 @@ import tank from '../canvas/tank'
 import util from '../util'
 
 export default class extends modelAbstract implements IModel {
+	name: string ='tank'
 	public canvas: ICanvas = tank
 	image(): HTMLImageElement {
 		const directionImg = `tank${this.direction}` as mapKey

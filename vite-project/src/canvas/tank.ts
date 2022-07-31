@@ -3,17 +3,20 @@ import canvasAbstract from './canvasAbstract'
 import model from '../model/tank'
 import position from '../services/position'
 class tank extends canvasAbstract implements ICanvas {
+	IntervalId = 0
 	num(): number {
 		return config.tank.num
 	}
 	model(): Modelconstructor {
 		return model
 	}
+	stop(){
+		clearInterval(this.IntervalId)
+	}
 	render(): void {
 		this.createModels()
 		this.renderModels()
-
-		setInterval(() => {
+		this.IntervalId = setInterval(() => {
 			this.renderModels()
 		}, config.timeout)
 	}

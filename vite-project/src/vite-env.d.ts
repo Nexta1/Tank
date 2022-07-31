@@ -9,6 +9,7 @@ interface BulletModelconstructor {
 }
 
 interface IModel {
+	name: string
 	// direction: import("f:/soft/Tank/vite-project/src/enum/positionEnum").directionEnum
     direction : string
     tank?: IModel
@@ -27,4 +28,5 @@ interface ICanvas {
     model():Modelconstructor | BulletModelconstructor
     canvasBox :CanvasRenderingContext2D,
     render(): void
+    stop?(): void
 }
